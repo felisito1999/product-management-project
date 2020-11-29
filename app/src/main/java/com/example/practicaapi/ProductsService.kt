@@ -9,7 +9,7 @@ interface ProductsService {
 
     @POST("auth/local")
     fun getToken(@Body credentials : Credentials) : Call<TokenInfo>
-    fun getProducts() : List<Products>
+    fun getProducts() : List<Product>
 
 }
 

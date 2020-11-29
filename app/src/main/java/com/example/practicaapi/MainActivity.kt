@@ -1,15 +1,8 @@
 package com.example.practicaapi
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,22 +18,13 @@ class MainActivity : AppCompatActivity() {
         setupActivity()
     }
 
-    private fun nonSuccessfulLoginAlert() {
-        val toast = Toast.makeText(
-            this,
-            "The user login data is not correct, check your credentials and try again",
-            Toast.LENGTH_LONG
-        )
-        toast.show()
-    }
-
     private fun setupActivity(){
         btn_login.setOnClickListener {
 
             val email = txt_emailAddress.text.toString()
             val password = txt_password.text.toString()
 
-            ServicerManager.getAuthenticationManager(this, MainActivity()).logIn(email, password)
+            ServiceManager.getAuthenticationManager(this, MainActivity()).logIn(email, password)
         }
     }
 }

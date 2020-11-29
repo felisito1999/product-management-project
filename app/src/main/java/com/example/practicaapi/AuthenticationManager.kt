@@ -1,6 +1,7 @@
 package com.example.practicaapi
 
 import android.app.Activity
+import android.app.Service
 import android.content.Context
 import android.widget.Toast
 import okhttp3.OkHttpClient
@@ -38,8 +39,12 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
                              loginActivity.runOnUiThread {
                                  run{
                                      Toast.makeText(innerContext, response.body()?.jwt, Toast.LENGTH_SHORT).show()
+                                     ServiceManager.getActivityManager(innerContext, loginActivity).goToHomeActivity()
                                  }
                              }
+                         }
+                         else {
+                             nonSuccessfulLoginAlert()
                          }
                      }
 
@@ -53,13 +58,19 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
 
                  })
              }
+             else {
+                 nonValidDataAlert()
+             }
+         }
+        else{
+             emptyLoginFieldsAlert()
          }
     }
-    fun checkEmptyFields(email: String, password: String) : Boolean {
+    private fun checkEmptyFields(email: String?, password: String?) : Boolean {
         return !email.isNullOrBlank() && !password.isNullOrBlank()
     }
 
-    fun validateEmail(email: String) : Boolean {
+    private fun validateEmail(email: String) : Boolean {
 
         var atCount :Int = 0
 
@@ -75,9 +86,29 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
         return minimumLength <= emailLength && atCount == 1
     }
 
-    fun validatePassword(password: String) : Boolean {
+    private fun validatePassword(password: String) : Boolean {
         val minimumLength = 6
 
         return minimumLength <= password.length
+    }
+
+
+    private fun nonSuccessfulLoginAlert() {
+        val toast = Toast.makeText(
+            innerContext,
+            "The user login data is not correct, check your credentials and try again",
+            Toast.LENGTH_LONG
+        )
+        toast.show()
+    }
+
+    private fun emptyLoginFieldsAlert() {
+        val toast = Toast.makeText(innerContext, "There are empty fields, fill them and try again", Toast.LENGTH_LONG)
+        toast.show()
+    }
+
+    private fun nonValidDataAlert() {
+        val toast = Toast.makeText(innerContext, "The data is not correct, try again", Toast.LENGTH_SHORT)
+        toast.show()
     }
 }

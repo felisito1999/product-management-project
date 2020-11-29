@@ -9,5 +9,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         ServiceManager.getActivityManager(this).checkIfLoggedIn()
+        //agregar métodos
     }
 }

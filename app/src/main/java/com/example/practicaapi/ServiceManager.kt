@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Context
 
 public object ServiceManager {
-    fun getAuthenticationManager(context : Context, activity : Activity) : AuthenticationManager {
-        return AuthenticationManager(context, activity)
+    fun getAuthenticationManager(activity : Activity) : AuthenticationManager {
+        return AuthenticationManager(activity)
     }
-    fun getActivityManager(context : Context, activity : Activity) : ActivitiesManager {
-        return ActivitiesManager(context, activity)
+    fun getActivityManager(activity : Activity) : ActivitiesManager {
+        return ActivitiesManager(activity)
+    }
+    fun getTokenManager(activity: Activity) : TokenManager {
+        return TokenManager(activity)
     }
 }

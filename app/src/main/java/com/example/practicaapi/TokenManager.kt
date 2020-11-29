@@ -16,7 +16,7 @@ public class TokenManager(context: Context) {
         sharedPreferencesEdit.commit()
     }
 
-    private fun getAccessToken() : String?{
+    fun getAccessToken() : String?{
         return innerContext.getSharedPreferences("DEFAULT_PREFERENCES", Context.MODE_PRIVATE).getString(
             innerContext.getString(
                 R.string.access_token_key

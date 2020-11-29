@@ -1,24 +1,22 @@
 package com.example.practicaapi
 
 import android.app.Activity
-import android.app.Service
 import android.content.Context
 import android.widget.Toast
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-public class AuthenticationManager(context : Context, loginActivity : Activity) {
-    private lateinit var tokenManager : TokenManager
-    private var innerContext = context
-    private var loginActivity = loginActivity
+class AuthenticationManager(loginActivity : Activity) {
+
+    private var targetActivity = loginActivity
     private var client = OkHttpClient()
 
     fun logIn(email : String, password : String) {
          if (checkEmptyFields(email, password)){
              if(validateEmail(email) && validatePassword(password)){
                  val retrofitManager = Retrofit.Builder()
-                     .baseUrl(innerContext.getString(R.string.api_base_url))
+                     .baseUrl(targetActivity.getString(R.string.api_base_url))
                      .addConverterFactory(GsonConverterFactory.create())
                      .client(client)
                      .build()
@@ -26,8 +24,6 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
                  var service = retrofitManager.create(ProductsService::class.java)
 
                  var credentials = Credentials(email, password)
-/*        credentials.identifier = "console@strapi.io"
-        credentials.password = "123456"*/
 
                  val getTokenRequest = service.getToken(credentials)
                  getTokenRequest.enqueue( object : retrofit2.Callback<TokenInfo>{
@@ -35,11 +31,13 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
                          call: retrofit2.Call<TokenInfo>,
                          response: retrofit2.Response<TokenInfo>
                      ) {
-                         if (response.isSuccessful){
-                             loginActivity.runOnUiThread {
+                         if (response.isSuccessful && response.body() != null){
+                             targetActivity.runOnUiThread {
                                  run{
-                                     Toast.makeText(innerContext, response.body()?.jwt, Toast.LENGTH_SHORT).show()
-                                     ServiceManager.getActivityManager(innerContext, loginActivity).goToHomeActivity()
+                                     val jwt = response.body()!!.jwt
+                                     Toast.makeText(targetActivity, "Klk mi loco", Toast.LENGTH_SHORT).show()
+                                     ServiceManager.getTokenManager(targetActivity).storeAccessToken(jwt)
+                                     ServiceManager.getActivityManager(targetActivity).goToHomeActivity()
                                  }
                              }
                          }
@@ -49,9 +47,9 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
                      }
 
                      override fun onFailure(call: retrofit2.Call<TokenInfo>, t: Throwable) {
-                         loginActivity.runOnUiThread {
+                         targetActivity.runOnUiThread {
                              run{
-                                 Toast.makeText(innerContext, "ERROR", Toast.LENGTH_SHORT).show()
+                                 Toast.makeText(targetActivity, "ERROR", Toast.LENGTH_SHORT).show()
                              }
                          }
                      }
@@ -95,7 +93,7 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
 
     private fun nonSuccessfulLoginAlert() {
         val toast = Toast.makeText(
-            innerContext,
+            targetActivity,
             "The user login data is not correct, check your credentials and try again",
             Toast.LENGTH_LONG
         )
@@ -103,12 +101,12 @@ public class AuthenticationManager(context : Context, loginActivity : Activity) 
     }
 
     private fun emptyLoginFieldsAlert() {
-        val toast = Toast.makeText(innerContext, "There are empty fields, fill them and try again", Toast.LENGTH_LONG)
+        val toast = Toast.makeText(targetActivity, "There are empty fields, fill them and try again", Toast.LENGTH_LONG)
         toast.show()
     }
 
     private fun nonValidDataAlert() {
-        val toast = Toast.makeText(innerContext, "The data is not correct, try again", Toast.LENGTH_SHORT)
+        val toast = Toast.makeText(targetActivity, "The data is not correct, try again", Toast.LENGTH_SHORT)
         toast.show()
     }
 }

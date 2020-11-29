@@ -19,14 +19,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActivity(){
+
+        ServiceManager.getActivityManager(this).checkIfLoggedIn()
+
         btn_login.setOnClickListener {
 
             val email = txt_emailAddress.text.toString()
             val password = txt_password.text.toString()
 
-            ServiceManager.getAuthenticationManager(this, MainActivity()).logIn(email, password)
+            ServiceManager.getAuthenticationManager(this).logIn(email, password)
         }
     }
+
 }
 
 /*private fun loadNewAccessToken(email: String, password: String) {

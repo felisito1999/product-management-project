@@ -1,19 +1,38 @@
 package com.example.practicaapi
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 
-class ActivitiesManager(context :Context, activity: Activity) {
+class ActivitiesManager(activity: Activity) {
 
-    private val innerContext = context
-    private val innerActivity = activity
+    private val targetActivity = activity
 
-    public fun goToHomeActivity(){
-        val homeActivityIntent = Intent(innerActivity, HomeActivity::class.java)
-        innerContext.startActivity(homeActivityIntent)
+    fun goToLogin(){
+        val loginActivityIntent = Intent(targetActivity, MainActivity::class.java)
+        targetActivity.startActivity(loginActivityIntent)
 
-        innerActivity.finish()
+        finishActivity()
     }
+
+    fun goToHomeActivity(){
+        val homeActivityIntent = Intent(targetActivity, HomeActivity::class.java)
+        targetActivity.startActivity(homeActivityIntent)
+
+        finishActivity()
+    }
+
+    fun finishActivity(){
+        targetActivity.finish()
+    }
+
+    fun checkIfLoggedIn() {
+        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty()) {
+            goToLogin()
+            finishActivity()
+        }else if(targetActivity.javaClass.isInstance(MainActivity())){
+            goToHomeActivity()
+            finishActivity()
+        }
+    }
+
 }

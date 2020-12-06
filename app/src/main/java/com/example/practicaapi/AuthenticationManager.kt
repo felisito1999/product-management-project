@@ -15,15 +15,15 @@ class AuthenticationManager(loginActivity : Activity) {
     fun logIn(email : String, password : String) {
          if (checkEmptyFields(email, password)){
              if(validateEmail(email) && validatePassword(password)){
-                 val retrofitManager = Retrofit.Builder()
+/*                  val retrofitManager = Retrofit.Builder()
                      .baseUrl(targetActivity.getString(R.string.api_base_url))
                      .addConverterFactory(GsonConverterFactory.create())
                      .client(client)
                      .build()
+*/
+                 val service = RetrofitBuilderHelper.getInstance(targetActivity)
 
-                 var service = retrofitManager.create(ProductsService::class.java)
-
-                 var credentials = Credentials(email, password)
+                 val credentials = Credentials(email, password)
 
                  val getTokenRequest = service.getToken(credentials)
                  getTokenRequest.enqueue( object : retrofit2.Callback<TokenInfo>{
@@ -35,7 +35,7 @@ class AuthenticationManager(loginActivity : Activity) {
                              targetActivity.runOnUiThread {
                                  run{
                                      val jwt = response.body()!!.jwt
-                                     Toast.makeText(targetActivity, "Klk mi loco", Toast.LENGTH_SHORT).show()
+                                     Toast.makeText(targetActivity, "Successful login", Toast.LENGTH_SHORT).show()
                                      ServiceManager.getTokenManager(targetActivity).storeAccessToken(jwt)
                                      ServiceManager.getActivityManager(targetActivity).goToHomeActivity()
                                  }
@@ -45,7 +45,6 @@ class AuthenticationManager(loginActivity : Activity) {
                              nonSuccessfulLoginAlert()
                          }
                      }
-
                      override fun onFailure(call: retrofit2.Call<TokenInfo>, t: Throwable) {
                          targetActivity.runOnUiThread {
                              run{
@@ -53,7 +52,6 @@ class AuthenticationManager(loginActivity : Activity) {
                              }
                          }
                      }
-
                  })
              }
              else {
@@ -70,13 +68,13 @@ class AuthenticationManager(loginActivity : Activity) {
 
     private fun validateEmail(email: String) : Boolean {
 
-        var atCount :Int = 0
+        var atCount  = 0
 
         val minimumLength = 10
         val emailLength = email.length
 
         email.forEach { Char ->
-            if (Char === '@'){
+            if (Char == '@'){
                 atCount += 1
             }
         }

@@ -15,7 +15,7 @@ class ProductManager(activity : Activity) {
     fun getProducts(onComplete: (List<Product>) -> Unit){
         val service = RetrofitBuilderHelper.getInstance(targetActivity)
         var products : List<Product> = emptyList<Product>()
-
+    //TODO: Implement token authorization
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
         service.getProducts().enqueue(object : retrofit2.Callback<List<Product>> {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {

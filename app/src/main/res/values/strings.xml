@@ -5,4 +5,13 @@
     <string name="txt_emailPlaceholder">E-mail</string>
     <string name="txt_passwordPlaceholder">Password</string>
     <string name="access_token_key">access_token_key</string>
+    <string name="product_image_content_description">This is the image of the product</string>
+    <string name="product_sku">Sku:</string>
+    <string name="product_model">Model:</string>
+    <string name="product_name">Name:</string>
+    <string name="product_type">Type:</string>
+    <string name="product_price">Price:</string>
+    <string name="product_price_value_example">000.00</string>
+    <string name="product_description">Description:</string>
+    <string name="product_value_example_string">Example data string</string>
 </resources>

@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 
 public object ServiceManager {
+    fun getProductManager(activity: Activity) : ProductManager{
+        return ProductManager(activity)
+    }
     fun getAuthenticationManager(activity : Activity) : AuthenticationManager {
         return AuthenticationManager(activity)
     }

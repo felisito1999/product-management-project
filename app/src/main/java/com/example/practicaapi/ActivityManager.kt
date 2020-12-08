@@ -26,7 +26,7 @@ class ActivitiesManager(activity: Activity) {
     }
 
     fun checkIfLoggedIn() {
-        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty()) {
+        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty() && !targetActivity.javaClass.isInstance(MainActivity())) {
             goToLogin()
             finishActivity()
         }else if(targetActivity.javaClass.isInstance(MainActivity())){

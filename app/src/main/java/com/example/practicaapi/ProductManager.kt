@@ -16,11 +16,12 @@ class ProductManager(activity : Activity) {
         val service = RetrofitBuilderHelper.getInstance(targetActivity)
         var products : List<Product> = emptyList<Product>()
     //TODO: Implement token authorization
+
+
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
         service.getProducts().enqueue(object : retrofit2.Callback<List<Product>> {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 var productsResponse = response.body()
-
                 onComplete.invoke(productsResponse!!)
 
                 Log.d("Data", response.body()!![0].name)
@@ -32,9 +33,4 @@ class ProductManager(activity : Activity) {
 
         })
     }
-
-/*    interface OnGetProductCallback{
-        fun onGetProductSuccess(productList:List<Product>)
-        fun onGetProductFailure(errorMessage: String)
-    }*/
 }

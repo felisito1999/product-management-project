@@ -14,4 +14,6 @@
     <string name="product_price_value_example">000.00</string>
     <string name="product_description">Description:</string>
     <string name="product_value_example_string">Example data string</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

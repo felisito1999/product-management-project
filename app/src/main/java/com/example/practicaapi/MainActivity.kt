@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
             ServiceManager.getAuthenticationManager(this).logIn(email, password)
         }
+
+        label_signUp.setOnClickListener {
+            ServiceManager.getActivityManager(this).goToSignUpActivity()
+        }
     }
 
 }

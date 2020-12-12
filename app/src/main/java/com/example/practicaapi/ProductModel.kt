@@ -2,7 +2,7 @@ package com.example.practicaapi
 
 import java.util.*
 
-data class Product (
+data class ProductModel (
     var id : Int,
     var sku : String,
     var name : String,

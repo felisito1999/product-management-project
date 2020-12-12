@@ -2,19 +2,15 @@ package com.example.practicaapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.navigationView
+import kotlinx.android.synthetic.main.activity_home.toolbar
+import kotlinx.android.synthetic.main.navigation_drawer_layout.*
 import kotlinx.android.synthetic.main.navigationview_header.view.*
 
 class HomeActivity : AppCompatActivity(){
@@ -24,6 +20,7 @@ class HomeActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         initView()
+
     }
 
 
@@ -31,10 +28,10 @@ class HomeActivity : AppCompatActivity(){
         setSupportActionBar(toolbar)
         setUpDrawerLayout()
 
-        navigationPosition = R.id.navItemInbox
-        navigateToFragment(AllProductsFragment.newInstance())
+        navigationPosition = R.id.navItemMainPage
+        navigateToFragment(MainPageFragment.newInstance())
         navigationView.setCheckedItem(navigationPosition)
-        toolbar.title = "Inbox"
+        toolbar.title = getString(R.string.home_string)
 
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
@@ -47,10 +44,20 @@ class HomeActivity : AppCompatActivity(){
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId){
-                R.id.navItemInbox -> {
-                    toolbar.title = "Inbox"
-                    navigationPosition = R.id.navItemInbox
+                R.id.navItemMainPage -> {
+                    toolbar.title = getString(R.string.home_string)
+                    navigationPosition= R.id.navItemMainPage
+                    navigateToFragment(MainPageFragment.newInstance())
+                }
+                R.id.navItemAllProducts -> {
+                    toolbar.title = getString(R.string.all_products_title)
+                    navigationPosition = R.id.navItemAllProducts
                     navigateToFragment(AllProductsFragment.newInstance())
+                }
+                R.id.navItemCreateProduct -> {
+                    toolbar.title = getString(R.string.create_product_title)
+                    navigationPosition = R.id.navItemAllProducts
+                    //navigateToFragment()
                 }
             }
             // set item as selected to persist highlight
@@ -108,11 +115,11 @@ class HomeActivity : AppCompatActivity(){
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        if (navigationPosition == R.id.navItemInbox) {
+        if (navigationPosition == R.id.navItemAllProducts) {
             finish()
         } else {
             //Navigate to Inbox Fragment
-            navigationPosition = R.id.navItemInbox
+            navigationPosition = R.id.navItemAllProducts
             navigateToFragment(AllProductsFragment.newInstance())
             navigationView.setCheckedItem(navigationPosition)
             toolbar.title = "Inbox"

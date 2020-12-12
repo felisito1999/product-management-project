@@ -60,8 +60,9 @@ class AllProductsFragment : Fragment() {
     }
 
     private fun getProductList() {
-        var products = emptyList<Product>()
-            ServiceManager.getProductManager(requireActivity()).getProducts{ productList ->
+        //TODO: Add pagination to the recyclerView
+        var products = emptyList<ProductModel>()
+            ServiceManager.getProductManager(requireActivity()).getProducts(0){ productList ->
                 products = productList
                 if (products != null) {
                     adapter = ProductRecyclerViewAdapter(requireActivity())

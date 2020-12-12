@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.product_item_recycler_view.view.*
 
 class ProductRecyclerViewAdapter internal constructor(
     context : Context) : RecyclerView.Adapter<ProductRecyclerViewAdapter.MyViewHolder>() {
     private val inflater = LayoutInflater.from(context)
-    private var products = emptyList<Product>()
+    private var products = emptyList<ProductModel>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = inflater.inflate(R.layout.product_item_recycler_view, viewGroup, false)
@@ -38,7 +37,7 @@ class ProductRecyclerViewAdapter internal constructor(
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val productItemView : LinearLayout = itemView.findViewById(R.id.product_item_recycler_view)
     }
-    internal fun setProductsList(productsCollection : List<Product>){
+    internal fun setProductsList(productsCollection : List<ProductModel>){
         this.products = productsCollection
         notifyDataSetChanged()
     }

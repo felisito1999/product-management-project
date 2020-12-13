@@ -1,9 +1,10 @@
 package com.example.practicaapi
 
 data class RegisterModel (
-    val username : String,
-    val email : String,
+    var username : String,
+    var email : String,
     val provider : String = "Email",
+    var password : String,
     val resetPasswordToken : String = "",
     val confirmationToken : String = "",
     val confirmed : Boolean = true,

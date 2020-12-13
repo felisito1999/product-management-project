@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitBuilderHelper{
     companion object{
-        fun getInstance(context : Context) : ProductsService{
+        fun getProductInstance(context : Context) : ProductsService{
             val client = OkHttpClient()
             val retrofitManager = Retrofit.Builder()
                 .baseUrl(context.getString(R.string.api_base_url))
@@ -36,6 +36,18 @@ class RetrofitBuilderHelper{
                 .build()
 
             return retrofitManager.create(ProductsService::class.java)
+        }
+
+        fun getAuthenticationInstance(context: Context) : AuthenticationService{
+            val client = OkHttpClient()
+
+            val retrofitManager = Retrofit.Builder()
+                .baseUrl(context.getString(R.string.api_base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+            return retrofitManager.create(AuthenticationService::class.java)
         }
     }
 }

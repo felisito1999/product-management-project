@@ -122,7 +122,7 @@ class HomeActivity : AppCompatActivity(){
             navigationPosition = R.id.navItemAllProducts
             navigateToFragment(AllProductsFragment.newInstance())
             navigationView.setCheckedItem(navigationPosition)
-            toolbar.title = "Inbox"
+            toolbar.title = "Home"
         }
     }
 

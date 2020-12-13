@@ -12,11 +12,11 @@ class ProductManager(activity : Activity) {
     private var client = OkHttpClient()
 
     fun getProducts(start: Int, onComplete: (List<ProductModel>) -> Unit){
-        val service = RetrofitBuilderHelper.getInstance(targetActivity)
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
+        val service = RetrofitBuilderHelper.getAuthenticatedInstance(targetActivity, token)
+
         var products : List<ProductModel> = emptyList<ProductModel>()
     //TODO: Implement token authorization
-
-        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
 
         service.getProducts(start).enqueue(object : retrofit2.Callback<List<ProductModel>> {
             override fun onResponse(call: Call<List<ProductModel>>, response: Response<List<ProductModel>>) {
@@ -33,7 +33,7 @@ class ProductManager(activity : Activity) {
     }
 
     fun getProductsCount(onComplete: (ProductCountResponse) -> Unit){
-        val service = RetrofitBuilderHelper.getInstance(targetActivity)
+        val service = RetrofitBuilderHelper.getProductInstance(targetActivity)
 
         service.getProductsCount().enqueue(object : retrofit2.Callback<ProductCountResponse>{
             override fun onResponse(

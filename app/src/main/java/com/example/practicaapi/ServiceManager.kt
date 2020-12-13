@@ -1,7 +1,6 @@
 package com.example.practicaapi
 
 import android.app.Activity
-import android.content.Context
 
 public object ServiceManager {
     fun getProductManager(activity: Activity) : ProductManager{

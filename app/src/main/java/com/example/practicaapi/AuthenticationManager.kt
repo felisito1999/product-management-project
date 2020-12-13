@@ -4,13 +4,57 @@ import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class AuthenticationManager(loginActivity : Activity) {
+class AuthenticationManager(activity : Activity) {
 
-    private var targetActivity = loginActivity
-    private var client = OkHttpClient()
+    private var targetActivity = activity
+
+    fun singUp(username: String, email: String, password: String){
+        if(checkEmptyFields(email, password)){
+            if(validateEmail(email) && validatePassword(password)){
+                val service = RetrofitBuilderHelper.getAuthenticationInstance(targetActivity)
+
+                val userInformation = RegisterModel(username = username, email = email, password = password )
+                val signUpUserRequest = service.signUpUser(userInformation)
+
+                signUpUserRequest.enqueue(object : retrofit2.Callback<RegisterResponse>{
+                    override fun onResponse(
+                        call: Call<RegisterResponse>,
+                        response: Response<RegisterResponse>
+                    ) {
+                       if(response.isSuccessful && response.body() != null){
+                           targetActivity.runOnUiThread {
+                               run{
+                                   Toast.makeText(targetActivity, "Welcome ${response.body()!!.user.username}", Toast.LENGTH_LONG).show()
+                                   ServiceManager.getTokenManager(targetActivity).storeAccessToken(response.body()!!.jwt)
+                                   ServiceManager.getActivityManager(targetActivity).goToHomeActivity()
+                               }
+                           }
+                       }
+                    }
+
+                    override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                        targetActivity.runOnUiThread {
+                            run{
+                                Toast.makeText(targetActivity, "ERROR", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                })
+            }
+            else {
+                nonValidDataAlert()
+            }
+        }
+        else {
+            emptyLoginFieldsAlert()
+        }
+    }
 
     fun logIn(email : String, password : String) {
          if (checkEmptyFields(email, password)){
@@ -21,7 +65,7 @@ class AuthenticationManager(loginActivity : Activity) {
                      .client(client)
                      .build()
 */
-                 val service = RetrofitBuilderHelper.getInstance(targetActivity)
+                 val service = RetrofitBuilderHelper.getAuthenticationInstance(targetActivity)
 
                  val credentials = Credentials(email, password)
 

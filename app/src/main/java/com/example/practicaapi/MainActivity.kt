@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActivity(){
 
-        //ServiceManager.getActivityManager(this).checkIfLoggedIn()
+        ServiceManager.getActivityManager(this).checkIfLoggedIn()
 
         btn_login.setOnClickListener {
 

@@ -24,6 +24,8 @@ class ActivitiesManager(activity: Activity) {
     fun goToSignUpActivity(){
         val signUpActivityIntent = Intent(targetActivity, SignUpActivity::class.java)
         targetActivity.startActivity(signUpActivityIntent)
+
+        finishActivity()
     }
 
     fun finishActivity(){

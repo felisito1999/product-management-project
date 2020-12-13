@@ -15,8 +15,17 @@ data class ProductModel (
     var model : String,
     var url : String,
     var image : String,
-    var published_at : Date,
-    var created_at: Date,
-    var updated_at : Date,
+    var published_at : String,
+    var created_at: String,
+    var updated_at : String,
     var categories : List<Category>
-)
+){
+    constructor() : this(
+        -1, "", "",
+        "","", 0.00,
+        0.00, "", "",
+        "", "", "",
+        "", "", "",
+        emptyList()
+    )
+}

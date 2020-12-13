@@ -1,12 +1,14 @@
 package com.example.practicaapi
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.internal.http2.Http2Reader
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +27,10 @@ class AllProductsFragment : Fragment() {
 
     private var adapter : ProductRecyclerViewAdapter? = null
     private var recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView_allProducts)
+    var products = mutableListOf<ProductModel>()
+
+    private var productsStart = 0
+    var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +47,7 @@ class AllProductsFragment : Fragment() {
         val rootView = inflater?.inflate(R.layout.fragment_all_products, container, false)
 
         // Inflate the layout for this fragment
-        getProductList()
+        getProductList(productsStart)
 
         return rootView
     }
@@ -49,26 +55,90 @@ class AllProductsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView_allProducts)
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_allProducts)
+        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+
+        initScrollListener()
+
     }
 
-    private fun getProductList() {
-        //TODO: Add pagination to the recyclerView
-        var products = emptyList<ProductModel>()
-            ServiceManager.getProductManager(requireActivity()).getProducts(0){ productList ->
-                products = productList
-                if (products != null) {
-                    adapter = ProductRecyclerViewAdapter(requireActivity())
-                    adapter?.setProductsList(products)
+    private fun initScrollListener() {
+        recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int){
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if(!isLoading){
+                    if(linearLayoutManager != null &&
+                        linearLayoutManager.findLastCompletelyVisibleItemPosition() ==
+                        products.size - 1){
 
-                    recyclerView?.adapter = adapter
+                        loadMore()
+                        isLoading = true
+                    }
+                }
+            }
+        })
+    }
+
+    @Suppress("DEPRECATION")
+    private fun loadMore() {
+        products.add(ProductModel())
+        adapter?.notifyItemInserted(products.size - 1)
+
+        val handler = Handler()
+
+        handler.postDelayed(Runnable {
+//            products.removeAt(products.size - 1)
+
+            val scrollPosition = products.size
+            adapter?.notifyItemRemoved(scrollPosition)
+
+            var currentSize = scrollPosition
+            val nextLimit = currentSize + 10
+
+            /*while(currentSize - 1 < nextLimit){
+                getProductList(productsStart)
+            }*/
+            getProductList(productsStart)
+            isLoading = false
+        }, 2000)
+    }
+
+    private fun getProductList(start : Int) {
+        //TODO: Add pagination to the recyclerView
+
+            ServiceManager.getProductManager(requireActivity()).getProducts(productsStart){ productList ->
+
+                if(products.size == 0){
+                    products = productList as MutableList<ProductModel>
+                    if (products != null) {
+                        adapter = ProductRecyclerViewAdapter(requireActivity())
+                        adapter?.setProductsList(products)
+
+                        recyclerView?.adapter = adapter
+
+                        productsStart += 10
+                    }
+                }
+                else {
+                    products.removeAt(products.size - 1)
+                    if(productList != null) {
+                        var newProducts = productList
+                        newProducts.forEach { newProduct ->
+                            products.add(newProduct)
+                        }
+                        adapter?.notifyDataSetChanged()
+                        productsStart += 10
+                        recyclerView?.scrollToPosition(products.size- 9)
+                    }
+
                 }
             }
     }

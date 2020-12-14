@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.practicaapi.models.ProductCountResponse
 import com.example.practicaapi.models.ProductModel
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 
@@ -109,14 +110,14 @@ class ProductService(activity : Activity) {
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
         val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
 
-        service.deleteProduct(id).enqueue(object: retrofit2.Callback<Int>{
-            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+        service.deleteProduct(id).enqueue(object: retrofit2.Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Toast.makeText(targetActivity,
                     "The product has been deleted successfully",
                     Toast.LENGTH_SHORT).show()
             }
 
-            override fun onFailure(call: Call<Int>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Toast.makeText(targetActivity,
                     "The product could not be deleted",
                     Toast.LENGTH_SHORT).show()

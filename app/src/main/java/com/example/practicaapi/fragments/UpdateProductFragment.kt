@@ -27,6 +27,7 @@ class UpdateProductFragment : Fragment() {
     private var param2: String? = null*/
 
     private lateinit var product : ProductModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 /*        arguments?.let {
@@ -82,7 +83,9 @@ class UpdateProductFragment : Fragment() {
             (activity as HomeActivity).navigateToFragment(allProductsFragment)
         }
         buttonDelete.setOnClickListener {
-            ServiceManager.getProductManager(requireActivity()).deleteProduct(product.id!!)
+            val id : Int? = product.id
+
+            ServiceManager.getProductManager(requireActivity()).deleteProduct(id!!)
             val allProductsFragment = AllProductsFragment.newInstance()
             (activity as HomeActivity).navigateToFragment(allProductsFragment)
         }

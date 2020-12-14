@@ -4,6 +4,7 @@ import com.example.practicaapi.models.Credentials
 import com.example.practicaapi.models.ProductCountResponse
 import com.example.practicaapi.models.ProductModel
 import com.example.practicaapi.models.TokenInfo
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,7 +21,7 @@ interface ProductsDataService {
     @PUT("products/{id}")
     fun updateProduct(@Body product : ProductModel, @Path("id") id : Int) : Call<ProductModel>
     @DELETE("products/{id}")
-    fun deleteProduct(@Path("id") id : Int) : Call<Int>
+    fun deleteProduct(@Path("id") id : Int) : Call<ResponseBody>
 }
 
 

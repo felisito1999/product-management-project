@@ -80,4 +80,50 @@ class ProductService(activity : Activity) {
 
         })
     }
+
+    fun updateProduct(product : ProductModel){
+        val productId = product.id!!
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
+        val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
+
+        service.updateProduct(product, productId).enqueue(object: retrofit2.Callback<ProductModel>{
+            override fun onResponse(call: Call<ProductModel>, response: Response<ProductModel>) {
+                val updatedProduct = response.body()
+                Toast.makeText(targetActivity,
+                    "The product ${updatedProduct?.name} has been updated",
+                    Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<ProductModel>, t: Throwable) {
+                Toast.makeText(targetActivity,
+                    "The product could not be updated",
+                    Toast.LENGTH_SHORT).show()
+
+                Log.e("UPDATE_ERROR", "An error has occurred while trying to update product")
+            }
+
+        })
+    }
+
+    fun deleteProduct(id : Int){
+        val productId = id
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
+        val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
+
+        service.deleteProduct(productId).enqueue(object: retrofit2.Callback<Int>{
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                Toast.makeText(targetActivity,
+                    "The product has been deleted successfully",
+                    Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<Int>, t: Throwable) {
+                Toast.makeText(targetActivity,
+                    "The product could not be deleted",
+                    Toast.LENGTH_SHORT).show()
+
+                Log.e("UPDATE_ERROR", "An error has occurred while trying to delete product")
+            }
+        })
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.practicaapi.models
 
 import com.example.practicaapi.models.Category
+import java.io.Serializable
 
 data class ProductModel (
     var id : Int?,
@@ -19,7 +20,7 @@ data class ProductModel (
     var created_at: String?,
     var updated_at : String?,
     var categories : List<Category>
-){
+) : Serializable{
     constructor() : this(
         -1, "", "",
         "","", 0.00,

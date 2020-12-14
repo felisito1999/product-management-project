@@ -41,4 +41,7 @@
     <string name="Cancel">Cancel</string>
     <string name="product_value_example"></string>
     <string name="product_value_example_string" />
+    <string name="product_update_title">Update product</string>
+    <string name="product_delete">Delete</string>
+    <string name="product_update_button">Update</string>
 </resources>

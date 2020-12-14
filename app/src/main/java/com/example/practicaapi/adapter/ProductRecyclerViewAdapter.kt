@@ -13,6 +13,7 @@ import com.example.practicaapi.services.DownloadImageFromInternetService
 import kotlinx.android.synthetic.main.product_item_recycler_view.view.*
 
 class ProductRecyclerViewAdapter internal constructor(
+    private val onItemClicked: (ProductModel) -> Unit,
     context : Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
     private var products = mutableListOf<ProductModel>()
@@ -46,6 +47,10 @@ class ProductRecyclerViewAdapter internal constructor(
             holder.productItemView.textview_price_value.text = product.price.toString()
 
             DownloadImageFromInternetService(holder.productItemView.imageview_product).execute(product.image)
+
+            holder.itemView.setOnClickListener {
+                onItemClicked(product)
+            }
         }
         else if(holder is LoadingViewHolder) {
             showLoadingView(holder, position)
@@ -54,6 +59,7 @@ class ProductRecyclerViewAdapter internal constructor(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val productItemView : LinearLayout = itemView.findViewById(R.id.product_item_recycler_view)
+
     }
     inner class LoadingViewHolder internal constructor(view: View) :
         RecyclerView.ViewHolder(view) {

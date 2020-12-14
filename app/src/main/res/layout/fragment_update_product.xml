@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.HomeActivity">
+
+    <TextView
+        android:id="@+id/textViewUpdateProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/product_update_title"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUpdateProduct">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewUpdateSku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_sku_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateSku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_sku_create"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:labelFor="@id/textViewUpdateSku" />
+
+            <TextView
+                android:id="@+id/textViewUpdateName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_name_create"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:labelFor="@id/textViewUpdateName" />
+
+            <TextView
+                android:id="@+id/textViewUpdateType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_type_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_type_create"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:labelFor="@id/textViewUpdateType" />
+
+            <TextView
+                android:id="@+id/textViewUpdateUpc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_upc_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateUpc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_upc_create"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:labelFor="@id/textViewUpdateUpc" />
+
+            <TextView
+                android:id="@+id/textViewUpdatePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_price_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdatePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_price_create"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:labelFor="@id/textViewUpdatePrice" />
+
+            <TextView
+                android:id="@+id/textViewUpdateShipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_shipping_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateShipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_shipping_create"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName|numberDecimal"
+                android:labelFor="@id/textViewUpdateShipping" />
+
+            <TextView
+                android:id="@+id/textViewUpdateDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_description_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_description_create"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:labelFor="@id/textViewUpdateDescription" />
+
+            <TextView
+                android:id="@+id/textViewUpdateManufacturer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_manufacturer_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateManufacturer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/product_manufacturer_create"
+                android:inputType="text"
+                android:labelFor="@id/textViewUpdateManufacturer" />
+
+            <TextView
+                android:id="@+id/textViewUpdateModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_model_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_model_create"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:labelFor="@id/textViewUpdateModel" />
+
+            <TextView
+                android:id="@+id/textViewUpdateImageUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_image_create"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextUpdateImageUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/product_image_create"
+                android:importantForAutofill="no"
+                android:inputType="textUri"
+                android:labelFor="@id/textViewUpdateImageUrl" />
+
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/product_update_button"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorDanger"
+                android:text="@string/product_delete"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/buttonCancelUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/Cancel"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import com.example.practicaapi.models.ProductCountResponse
 import com.example.practicaapi.models.ProductModel
 import com.example.practicaapi.models.TokenInfo
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -16,6 +17,10 @@ interface ProductsDataService {
     fun getProductsCount() : Call<ProductCountResponse>
     @POST("products")
     fun saveProduct(@Body product: ProductModel) : Call<ProductModel>
+    @PUT("products/{id}")
+    fun updateProduct(@Body product : ProductModel, @Path("id") id : Int) : Call<ProductModel>
+    @DELETE("products")
+    fun deleteProduct(@Query("id") id : Int) : Call<Int>
 }
 
 

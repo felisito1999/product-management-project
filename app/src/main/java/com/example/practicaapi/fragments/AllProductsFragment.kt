@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicaapi.models.ProductModel
 import com.example.practicaapi.adapter.ProductRecyclerViewAdapter
 import com.example.practicaapi.R
+import com.example.practicaapi.activities.HomeActivity
 import com.example.practicaapi.services.ServiceManager
+import kotlinx.android.synthetic.main.activity_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,8 +61,6 @@ class AllProductsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,6 +70,7 @@ class AllProductsFragment : Fragment() {
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
 
         initScrollListener()
+
 
     }
 
@@ -106,9 +108,6 @@ class AllProductsFragment : Fragment() {
             var currentSize = scrollPosition
             val nextLimit = currentSize + 10
 
-            /*while(currentSize - 1 < nextLimit){
-                getProductList(productsStart)
-            }*/
             getProductList(productsStart)
             isLoading = false
         }, 2000)
@@ -123,7 +122,18 @@ class AllProductsFragment : Fragment() {
                 if(products.size == 0){
                     products = productList as MutableList<ProductModel>
                     if (products != null) {
-                        adapter = ProductRecyclerViewAdapter(requireActivity())
+                        adapter = ProductRecyclerViewAdapter({productModel ->
+                            Toast.makeText(context, "Hello my name is ${productModel.name}", Toast.LENGTH_SHORT).show()
+
+                            val updateFragment = UpdateProductFragment.newInstance()
+                            val bundle = Bundle()
+                            bundle.putSerializable("product", productModel)
+                            updateFragment.arguments = bundle
+
+                            (activity as HomeActivity).navigateToFragment(updateFragment)
+
+
+                        },requireContext())
                         adapter?.setProductsList(products)
 
                         recyclerView?.adapter = adapter

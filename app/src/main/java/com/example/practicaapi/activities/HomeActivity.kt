@@ -11,6 +11,7 @@ import com.example.practicaapi.R
 import com.example.practicaapi.fragments.AllProductsFragment
 import com.example.practicaapi.fragments.CreateProductsFragment
 import com.example.practicaapi.fragments.MainPageFragment
+import com.example.practicaapi.fragments.UpdateProductFragment
 import kotlinx.android.synthetic.main.activity_home.navigationView
 import kotlinx.android.synthetic.main.activity_home.toolbar
 import kotlinx.android.synthetic.main.navigationview_header.view.*
@@ -90,7 +91,7 @@ class HomeActivity : AppCompatActivity(){
         toggle.syncState()
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment) {
+    fun navigateToFragment(fragmentToNavigate: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.content_frame, fragmentToNavigate)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -105,14 +106,14 @@ class HomeActivity : AppCompatActivity(){
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        if (navigationPosition == R.id.navItemAllProducts) {
+        if (navigationPosition == R.id.navItemMainPage) {
             finish()
         } else {
-            //Navigate to Inbox Fragment
-            navigationPosition = R.id.navItemAllProducts
-            navigateToFragment(AllProductsFragment.newInstance())
+            navigationPosition = R.id.navItemMainPage
+            navigateToFragment(MainPageFragment.newInstance())
             navigationView.setCheckedItem(navigationPosition)
-            toolbar.title = "Home"
+            toolbar.title = "Main Page"
         }
+
     }
 }

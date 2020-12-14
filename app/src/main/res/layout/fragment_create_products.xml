@@ -8,7 +8,7 @@
 
     <ScrollView
         android:id="@+id/scrollViewCreateFields"
-        android:layout_width="408dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,8 +103,8 @@
                 android:layout_marginRight="16dp"
                 android:ems="10"
                 android:hint="@string/product_description_create"
-                android:inputType="textMultiLine|textPersonName"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine|textPersonName" />
 
             <EditText
                 android:id="@+id/editTextManufacturerCreate"

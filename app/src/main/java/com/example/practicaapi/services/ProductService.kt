@@ -106,11 +106,10 @@ class ProductService(activity : Activity) {
     }
 
     fun deleteProduct(id : Int){
-        val productId = id
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
         val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
 
-        service.deleteProduct(productId).enqueue(object: retrofit2.Callback<Int>{
+        service.deleteProduct(id).enqueue(object: retrofit2.Callback<Int>{
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 Toast.makeText(targetActivity,
                     "The product has been deleted successfully",

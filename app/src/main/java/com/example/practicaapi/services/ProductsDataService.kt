@@ -19,8 +19,8 @@ interface ProductsDataService {
     fun saveProduct(@Body product: ProductModel) : Call<ProductModel>
     @PUT("products/{id}")
     fun updateProduct(@Body product : ProductModel, @Path("id") id : Int) : Call<ProductModel>
-    @DELETE("products")
-    fun deleteProduct(@Query("id") id : Int) : Call<Int>
+    @DELETE("products/{id}")
+    fun deleteProduct(@Path("id") id : Int) : Call<Int>
 }
 
 

@@ -1,4 +1,6 @@
-package com.example.practicaapi
+package com.example.practicaapi.models
+
+import com.example.practicaapi.models.Role
 
 data class User (
     var id : Int,

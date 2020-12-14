@@ -1,4 +1,4 @@
-package com.example.practicaapi
+package com.example.practicaapi.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +7,12 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.android.synthetic.main.activity_home.*
+import com.example.practicaapi.R
+import com.example.practicaapi.fragments.AllProductsFragment
+import com.example.practicaapi.fragments.CreateProductsFragment
+import com.example.practicaapi.fragments.MainPageFragment
 import kotlinx.android.synthetic.main.activity_home.navigationView
 import kotlinx.android.synthetic.main.activity_home.toolbar
-import kotlinx.android.synthetic.main.navigation_drawer_layout.*
 import kotlinx.android.synthetic.main.navigationview_header.view.*
 
 class HomeActivity : AppCompatActivity(){
@@ -36,7 +38,9 @@ class HomeActivity : AppCompatActivity(){
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.nav_app_bar_open_drawer_description, R.string.nav_app_bar_navigate_up_description
+            this, drawerLayout, toolbar,
+            R.string.nav_app_bar_open_drawer_description,
+            R.string.nav_app_bar_navigate_up_description
         )
 
         drawerLayout.addDrawerListener(toggle)
@@ -56,8 +60,8 @@ class HomeActivity : AppCompatActivity(){
                 }
                 R.id.navItemCreateProduct -> {
                     toolbar.title = getString(R.string.create_product_title)
-                    navigationPosition = R.id.navItemAllProducts
-                    //navigateToFragment()
+                    navigationPosition = R.id.navItemCreateProduct
+                    navigateToFragment(CreateProductsFragment.newInstance())
                 }
             }
             // set item as selected to persist highlight
@@ -67,23 +71,6 @@ class HomeActivity : AppCompatActivity(){
             true
         }
 
-        /*drawerLayout.addDrawerListener(object:DrawerLayout.DrawerListener{
-            override fun onDrawerStateChanged(p0: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDrawerSlide(p0: View, p1: Float) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDrawerClosed(p0: View) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDrawerOpened(p0: View) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })*/
         changeNavigationHeaderInfo()
     }
 
@@ -95,7 +82,10 @@ class HomeActivity : AppCompatActivity(){
     private fun setUpDrawerLayout() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.nav_app_bar_open_drawer_description, R.string.nav_app_bar_navigate_up_description)
+            this, drawerLayout, toolbar,
+            R.string.nav_app_bar_open_drawer_description,
+            R.string.nav_app_bar_navigate_up_description
+        )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
     }
@@ -125,34 +115,4 @@ class HomeActivity : AppCompatActivity(){
             toolbar.title = "Home"
         }
     }
-
-/*    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
-            R.id.action_settings -> {
-                Toast.makeText(this, "Publication", Toast.LENGTH_SHORT).show()
-            }
-            R.id.action_refresh -> {
-                Toast.makeText(this, "Android Store", Toast.LENGTH_SHORT).show()
-            }
-*//*            R.id.nav_news -> {
-                Toast.makeText(this, "Newsletter", Toast.LENGTH_SHORT).show()
-            }
-            R.id.nav_join -> {
-                Toast.makeText(this, "Join Community", Toast.LENGTH_SHORT).show()
-            }
-            R.id.nav_contact -> {
-                Toast.makeText(this, "Contact us", Toast.LENGTH_SHORT).show()
-            }*//*
-        }
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }*/
-
-/*    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }*/
-
-/*    */
 }

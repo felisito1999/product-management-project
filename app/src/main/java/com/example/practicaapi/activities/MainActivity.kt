@@ -1,7 +1,9 @@
-package com.example.practicaapi
+package com.example.practicaapi.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.practicaapi.R
+import com.example.practicaapi.services.ServiceManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

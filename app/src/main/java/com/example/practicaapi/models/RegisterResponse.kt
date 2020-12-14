@@ -1,4 +1,6 @@
-package com.example.practicaapi
+package com.example.practicaapi.models
+
+import com.example.practicaapi.models.User
 
 class RegisterResponse{
     lateinit var jwt: String

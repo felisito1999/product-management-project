@@ -1,7 +1,10 @@
-package com.example.practicaapi
+package com.example.practicaapi.services
 
 import android.app.Activity
 import android.content.Intent
+import com.example.practicaapi.activities.HomeActivity
+import com.example.practicaapi.activities.MainActivity
+import com.example.practicaapi.activities.SignUpActivity
 
 class ActivitiesManager(activity: Activity) {
 
@@ -33,7 +36,9 @@ class ActivitiesManager(activity: Activity) {
     }
 
     fun checkIfLoggedIn() {
-        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty() && !targetActivity.javaClass.isInstance(MainActivity())) {
+        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty() && !targetActivity.javaClass.isInstance(
+                MainActivity()
+            )) {
             goToLogin()
             finishActivity()
         }else if(targetActivity.javaClass.isInstance(MainActivity())){

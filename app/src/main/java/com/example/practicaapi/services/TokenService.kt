@@ -1,8 +1,9 @@
-package com.example.practicaapi
+package com.example.practicaapi.services
 
 import android.content.Context
+import com.example.practicaapi.R
 
-public class TokenManager(context: Context) {
+public class TokenService(context: Context) {
 
     private val innerContext : Context = context
 

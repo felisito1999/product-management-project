@@ -1,4 +1,4 @@
-package com.example.practicaapi
+package com.example.practicaapi.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practicaapi.R
+import com.example.practicaapi.models.ProductModel
+import com.example.practicaapi.services.DownloadImageFromInternetService
 import kotlinx.android.synthetic.main.product_item_recycler_view.view.*
 
 class ProductRecyclerViewAdapter internal constructor(
@@ -36,12 +39,13 @@ class ProductRecyclerViewAdapter internal constructor(
         if(holder is MyViewHolder){
             val product = products[position]
 
-            holder.productItemView.textview_sku_value.text = product.sku
+            holder.productItemView.textview_sku_value.text = product.sku.toString()
             holder.productItemView.textview_model_value.text = product.model
             holder.productItemView.textview_name_value.text = product.name
             holder.productItemView.textview_type_value.text = product.type
             holder.productItemView.textview_price_value.text = product.price.toString()
-            DownloadImageFromInternet(holder.productItemView.imageview_product).execute(product.image)
+
+            DownloadImageFromInternetService(holder.productItemView.imageview_product).execute(product.image)
         }
         else if(holder is LoadingViewHolder) {
             showLoadingView(holder, position)

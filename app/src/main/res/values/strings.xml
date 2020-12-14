@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Practica api</string>
-    <string name="api_base_url">http://10.0.0.8:1337/</string>
+    <string name="api_base_url">http://10.0.0.5:1337/</string>
     <string name="btn_login">Login</string>
     <string name="txt_emailPlaceholder">E-mail</string>
     <string name="txt_passwordPlaceholder">Password</string>
@@ -13,8 +13,6 @@
     <string name="product_price">Price:</string>
     <string name="product_price_value_example">000.00</string>
     <string name="product_description">Description:</string>
-    <string name="product_value_example_string">Example data string</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="all_products_title">All products</string>
     <string name="create_product_title">Create product</string>
@@ -26,4 +24,21 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="return_to_login">Return to login</string>
+    <string name="product_create_title">Create category</string>
+    <string name="product_sku_create">Sku</string>
+    <string name="product_name_create">Name</string>
+    <string name="product_type_create">Type</string>
+    <string name="product_upc_create">Upc</string>
+    <string name="product_price_create">Price</string>
+    <string name="product_shipping_create">Shpping cost</string>
+    <string name="product_description_create">Description</string>
+    <string name="product_manufacturer_create">Manufacturer</string>
+    <string name="product_model_create">Model</string>
+    <string name="product_url_create">Url</string>
+    <string name="product_image_create">Image Url</string>
+    <string name="product_categories_create">Category</string>
+    <string name="save">Save</string>
+    <string name="Cancel">Cancel</string>
+    <string name="product_value_example"></string>
+    <string name="product_value_example_string" />
 </resources>

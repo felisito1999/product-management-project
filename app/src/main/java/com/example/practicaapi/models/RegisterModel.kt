@@ -1,4 +1,4 @@
-package com.example.practicaapi
+package com.example.practicaapi.models
 
 data class RegisterModel (
     var username : String,

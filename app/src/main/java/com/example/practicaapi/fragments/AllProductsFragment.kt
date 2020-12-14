@@ -1,4 +1,4 @@
-package com.example.practicaapi
+package com.example.practicaapi.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import okhttp3.internal.http2.Http2Reader
+import com.example.practicaapi.models.ProductModel
+import com.example.practicaapi.adapter.ProductRecyclerViewAdapter
+import com.example.practicaapi.R
+import com.example.practicaapi.services.ServiceManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -114,7 +117,8 @@ class AllProductsFragment : Fragment() {
     private fun getProductList(start : Int) {
         //TODO: Add pagination to the recyclerView
 
-            ServiceManager.getProductManager(requireActivity()).getProducts(productsStart){ productList ->
+            ServiceManager.getProductManager(requireActivity())
+                .getProducts(productsStart){ productList ->
 
                 if(products.size == 0){
                     products = productList as MutableList<ProductModel>

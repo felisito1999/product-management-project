@@ -1,13 +1,13 @@
-package com.example.practicaapi
+package com.example.practicaapi.services
 
 import android.app.Activity
-import android.content.Context
 import android.widget.Toast
-import okhttp3.OkHttpClient
+import com.example.practicaapi.models.Credentials
+import com.example.practicaapi.models.RegisterModel
+import com.example.practicaapi.models.RegisterResponse
+import com.example.practicaapi.models.TokenInfo
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class AuthenticationManager(activity : Activity) {
 
@@ -16,7 +16,7 @@ class AuthenticationManager(activity : Activity) {
     fun singUp(username: String, email: String, password: String){
         if(checkEmptyFields(email, password)){
             if(validateEmail(email) && validatePassword(password)){
-                val service = RetrofitBuilderHelper.getAuthenticationInstance(targetActivity)
+                val service = RetrofitBuilderService.getAuthenticationInstance(targetActivity)
 
                 val userInformation = RegisterModel(username = username, email = email, password = password )
                 val signUpUserRequest = service.signUpUser(userInformation)
@@ -65,7 +65,7 @@ class AuthenticationManager(activity : Activity) {
                      .client(client)
                      .build()
 */
-                 val service = RetrofitBuilderHelper.getAuthenticationInstance(targetActivity)
+                 val service = RetrofitBuilderService.getAuthenticationInstance(targetActivity)
 
                  val credentials = Credentials(email, password)
 

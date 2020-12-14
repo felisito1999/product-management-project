@@ -1,19 +1,21 @@
-package com.example.practicaapi
+package com.example.practicaapi.services
 
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import com.example.practicaapi.models.ProductCountResponse
+import com.example.practicaapi.models.ProductModel
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Response
 
-class ProductManager(activity : Activity) {
+class ProductService(activity : Activity) {
     private var targetActivity = activity
     private var client = OkHttpClient()
 
     fun getProducts(start: Int, onComplete: (List<ProductModel>) -> Unit){
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
-        val service = RetrofitBuilderHelper.getAuthenticatedInstance(targetActivity, token)
+        val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
 
         var products : List<ProductModel> = emptyList<ProductModel>()
     //TODO: Implement token authorization
@@ -33,7 +35,8 @@ class ProductManager(activity : Activity) {
     }
 
     fun getProductsCount(onComplete: (ProductCountResponse) -> Unit){
-        val service = RetrofitBuilderHelper.getProductInstance(targetActivity)
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
+        val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
 
         service.getProductsCount().enqueue(object : retrofit2.Callback<ProductCountResponse>{
             override fun onResponse(
@@ -53,6 +56,28 @@ class ProductManager(activity : Activity) {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        })
+    }
+
+    fun saveProduct(product : ProductModel){
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
+        val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
+
+        service.saveProduct(product).enqueue(object: retrofit2.Callback<ProductModel>{
+            override fun onResponse(call: Call<ProductModel>, response: Response<ProductModel>) {
+                Toast.makeText(targetActivity, "Product added successfully", Toast.LENGTH_SHORT).show()
+
+
+            }
+
+            override fun onFailure(call: Call<ProductModel>, t: Throwable) {
+                Toast.makeText(
+                    targetActivity,
+                    "Could not save the product",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         })
     }
 }

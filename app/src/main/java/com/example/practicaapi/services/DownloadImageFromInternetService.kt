@@ -1,4 +1,4 @@
-package com.example.practicaapi
+package com.example.practicaapi.services
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 
 @Suppress("DEPRECATION")
-class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
+class DownloadImageFromInternetService(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
     override fun doInBackground(vararg urls: String): Bitmap? {
         val imageURL = urls[0]
         var image: Bitmap? = null

@@ -1,8 +1,10 @@
-package com.example.practicaapi
+package com.example.practicaapi.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import com.example.practicaapi.R
+import com.example.practicaapi.services.ServiceManager
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignUpActivity : AppCompatActivity() {

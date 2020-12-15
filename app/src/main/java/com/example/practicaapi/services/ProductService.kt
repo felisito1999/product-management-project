@@ -68,7 +68,6 @@ class ProductService(activity : Activity) {
             override fun onResponse(call: Call<ProductModel>, response: Response<ProductModel>) {
                 Toast.makeText(targetActivity, "Product added successfully", Toast.LENGTH_SHORT).show()
 
-
             }
 
             override fun onFailure(call: Call<ProductModel>, t: Throwable) {
@@ -100,7 +99,6 @@ class ProductService(activity : Activity) {
                     "The product could not be updated",
                     Toast.LENGTH_SHORT).show()
 
-                Log.e("UPDATE_ERROR", "An error has occurred while trying to update product")
             }
 
         })
@@ -121,8 +119,6 @@ class ProductService(activity : Activity) {
                 Toast.makeText(targetActivity,
                     "The product could not be deleted",
                     Toast.LENGTH_SHORT).show()
-
-                Log.e("UPDATE_ERROR", "An error has occurred while trying to delete product")
             }
         })
     }

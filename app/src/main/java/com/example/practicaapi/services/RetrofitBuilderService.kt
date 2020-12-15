@@ -70,5 +70,25 @@ class RetrofitBuilderService{
 
             return retrofitManager.create(AuthenticationDataService::class.java)
         }
+
+        fun getAuthenticatedUsersInstance(context : Context, token: String) : UsersDataService {
+            val client = OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", "Bearer $token")
+                        .build()
+
+                    chain.proceed(newRequest)
+                }
+                .build()
+
+            val retrofitManager = Retrofit.Builder()
+                .baseUrl(context.getString(R.string.api_base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+            return retrofitManager.create(UsersDataService::class.java)
+        }
     }
 }

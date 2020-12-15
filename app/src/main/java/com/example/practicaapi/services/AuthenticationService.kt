@@ -13,12 +13,17 @@ class AuthenticationManager(activity : Activity) {
 
     private var targetActivity = activity
 
-    fun singUp(username: String, email: String, password: String){
+    fun singUp(registerModel: RegisterModel){
+        val username = registerModel.username
+        val firstName = registerModel.firstname
+        val lastname = registerModel.lastname
+        val email = registerModel.email
+        val password = registerModel.password
         if(checkEmptyFields(email, password)){
             if(validateEmail(email) && validatePassword(password)){
                 val service = RetrofitBuilderService.getAuthenticationInstance(targetActivity)
 
-                val userInformation = RegisterModel(username = username, email = email, password = password )
+                val userInformation = RegisterModel(username = username, firstName, lastname, email = email, password = password )
                 val signUpUserRequest = service.signUpUser(userInformation)
 
                 signUpUserRequest.enqueue(object : retrofit2.Callback<RegisterResponse>{

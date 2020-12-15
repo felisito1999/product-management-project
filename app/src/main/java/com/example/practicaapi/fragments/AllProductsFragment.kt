@@ -122,8 +122,8 @@ class AllProductsFragment : Fragment() {
                 if(products.size == 0){
                     products = productList as MutableList<ProductModel>
                     if (products != null) {
+
                         adapter = ProductRecyclerViewAdapter({productModel ->
-                            Toast.makeText(context, "Hello my name is ${productModel.name}", Toast.LENGTH_SHORT).show()
 
                             val updateFragment = UpdateProductFragment.newInstance()
                             val bundle = Bundle()
@@ -131,11 +131,9 @@ class AllProductsFragment : Fragment() {
                             updateFragment.arguments = bundle
 
                             (activity as HomeActivity).navigateToFragment(updateFragment)
-
-
                         },requireContext())
-                        adapter?.setProductsList(products)
 
+                        adapter?.setProductsList(products)
                         recyclerView?.adapter = adapter
 
                         productsStart += 10
@@ -143,14 +141,19 @@ class AllProductsFragment : Fragment() {
                 }
                 else {
                     products.removeAt(products.size - 1)
+
                     if(productList != null) {
+
                         var newProducts = productList
                         newProducts.forEach { newProduct ->
                             products.add(newProduct)
                         }
+
                         adapter?.notifyDataSetChanged()
-                        productsStart += 10
+
                         recyclerView?.scrollToPosition(products.size- 9)
+
+                        productsStart += 10
                     }
 
                 }

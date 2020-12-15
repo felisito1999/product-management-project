@@ -24,4 +24,10 @@ public class TokenService(context: Context) {
             ), ""
         )
     }
+
+    fun deleteToken() {
+        val sharedPreferencesEdit = innerContext.getSharedPreferences("DEFAULT_PREFERENCES", Context.MODE_PRIVATE).edit()
+        sharedPreferencesEdit.clear()
+        sharedPreferencesEdit.commit()
+    }
 }

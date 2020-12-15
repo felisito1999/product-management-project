@@ -1,11 +1,9 @@
 package com.example.practicaapi.services
 
-import com.example.practicaapi.models.Credentials
-import com.example.practicaapi.models.RegisterModel
-import com.example.practicaapi.models.RegisterResponse
-import com.example.practicaapi.models.TokenInfo
+import com.example.practicaapi.models.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthenticationDataService {

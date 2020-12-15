@@ -13,7 +13,7 @@ import retrofit2.http.*
 interface ProductsDataService {
 
     @GET("products")
-    fun getProducts(@Query("_start") start: Int, @Query("_limit") limit: Int = 10, @Query("_sort") sort: String = "id") : Call<List<ProductModel>>
+    fun getProducts(@Query("_start") start: Int, @Query("_limit") limit: Int = 10) : Call<List<ProductModel>>
     @GET("products/count")
     fun getProductsCount() : Call<ProductCountResponse>
     @POST("products")

@@ -12,12 +12,15 @@ import com.example.practicaapi.fragments.AllProductsFragment
 import com.example.practicaapi.fragments.CreateProductsFragment
 import com.example.practicaapi.fragments.MainPageFragment
 import com.example.practicaapi.fragments.UpdateProductFragment
+import com.example.practicaapi.models.UserInfoModel
+import com.example.practicaapi.services.ServiceManager
 import kotlinx.android.synthetic.main.activity_home.navigationView
 import kotlinx.android.synthetic.main.activity_home.toolbar
 import kotlinx.android.synthetic.main.navigationview_header.view.*
 
 class HomeActivity : AppCompatActivity(){
     private var navigationPosition : Int = 0
+    lateinit var loggedUser : UserInfoModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +74,20 @@ class HomeActivity : AppCompatActivity(){
             drawerLayout.closeDrawers()
             true
         }
-
-        changeNavigationHeaderInfo()
+        loadUserInformation()
     }
 
     private fun changeNavigationHeaderInfo() {
         val headerView = navigationView.getHeaderView(0)
-        headerView.textEmail.text = "felejunier@hotmail.com"
+        headerView.textEmail.text = "Hello ${loggedUser.username}"
+    }
+
+    private fun loadUserInformation() {
+        ServiceManager.getUserInformationManager(this).getUserInformation { user ->
+            loggedUser = user
+
+            changeNavigationHeaderInfo()
+        }
     }
 
     private fun setUpDrawerLayout() {

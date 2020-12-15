@@ -2,6 +2,8 @@ package com.example.practicaapi.models
 
 data class RegisterModel (
     var username : String,
+    var firstname : String,
+    var lastname : String,
     var email : String,
     val provider : String = "Email",
     var password : String,

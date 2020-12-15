@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practica api</string>
+    <string name="app_name">Felix store</string>
     <string name="api_base_url">http://10.0.0.5:1337/</string>
     <string name="btn_login">Login</string>
     <string name="txt_emailPlaceholder">E-mail</string>
@@ -24,9 +24,9 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="return_to_login">Return to login</string>
-    <string name="product_create_title">Create category</string>
     <string name="product_sku_create">Sku</string>
     <string name="product_name_create">Name</string>
+    <string name="sign_out">Sign out</string>
     <string name="product_type_create">Type</string>
     <string name="product_upc_create">Upc</string>
     <string name="product_price_create">Price</string>
@@ -44,4 +44,6 @@
     <string name="product_update_title">Update product</string>
     <string name="product_delete">Delete</string>
     <string name="product_update_button">Update</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
 </resources>

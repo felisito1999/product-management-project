@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.practicaapi.R
+import com.example.practicaapi.services.ServiceManager
+import kotlinx.android.synthetic.main.fragment_main_page.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +39,20 @@ class MainPageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_page, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setListeners()
+    }
+
+    private fun setListeners() {
+        buttonSignOut.setOnClickListener {
+            Toast.makeText(activity, "Sorry to see you go, come again soon", Toast.LENGTH_LONG)
+            ServiceManager.getTokenManager(requireActivity()).deleteToken()
+            ServiceManager.getActivityManager(requireActivity()).goToLogin()
+        }
     }
 
     companion object {

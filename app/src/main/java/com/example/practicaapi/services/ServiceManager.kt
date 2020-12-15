@@ -13,6 +13,9 @@ public object ServiceManager {
     fun getAuthenticationManager(activity : Activity) : AuthenticationManager {
         return AuthenticationManager(activity)
     }
+    fun getUserInformationManager(activity: Activity) : UsersService{
+        return UsersService(activity)
+    }
     fun getActivityManager(activity : Activity) : ActivitiesManager {
         return ActivitiesManager(activity)
     }

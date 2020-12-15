@@ -10,10 +10,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import com.example.practicaapi.R
+import com.example.practicaapi.activities.HomeActivity
 import com.example.practicaapi.models.Category
 import com.example.practicaapi.models.ProductModel
 import com.example.practicaapi.services.ServiceManager
 import kotlinx.android.synthetic.main.fragment_create_products.*
+import kotlinx.android.synthetic.main.fragment_update_product.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -82,6 +84,12 @@ class CreateProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val product = ProductModel(null, sku, type, name,  upc, price, shipping, description, manufacturer, model, url, imageUrl, null, null, null, categories)
 
             ServiceManager.getProductManager(requireActivity()).saveProduct(product)
+
+            navigateToAllProducts()
+        }
+
+        buttonCancelCreate.setOnClickListener {
+            navigateToAllProducts()
         }
     }
 
@@ -98,6 +106,11 @@ class CreateProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
             categorySpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             spinner?.adapter = categorySpinnerAdapter
         }
+    }
+
+    fun navigateToAllProducts() {
+        val allProductsFragment = AllProductsFragment.newInstance()
+        (activity as HomeActivity).navigateToFragment(allProductsFragment)
     }
 
     companion object {

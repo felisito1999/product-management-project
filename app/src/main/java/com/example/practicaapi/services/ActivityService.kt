@@ -41,7 +41,7 @@ class ActivitiesManager(activity: Activity) {
             )) {
             goToLogin()
             finishActivity()
-        }else if(targetActivity.javaClass.isInstance(MainActivity())){
+        }else if(!targetActivity.javaClass.isInstance(MainActivity())){
             goToHomeActivity()
             finishActivity()
         }

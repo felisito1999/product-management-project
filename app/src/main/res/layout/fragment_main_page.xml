@@ -23,6 +23,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textViewWelcomeSign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32sp"
+                android:text="@string/welcome_sign"
+                android:textAlignment="center"
+                android:textSize="36sp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -30,7 +39,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView_productCountTitle"
@@ -38,7 +47,17 @@
                         android:layout_height="wrap_content"
                         android:text="@string/product_count_title"
                         android:textAlignment="center"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/textViewProductsCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/value_0"
+                        android:textAlignment="center"
+                        android:textSize="36sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

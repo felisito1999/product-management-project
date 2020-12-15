@@ -15,7 +15,7 @@ interface ProductsDataService {
     @GET("products")
     fun getProducts(@Query("_start") start: Int, @Query("_limit") limit: Int = 10) : Call<List<ProductModel>>
     @GET("products/count")
-    fun getProductsCount() : Call<ProductCountResponse>
+    fun getProductsCount() : Call<Int>
     @POST("products")
     fun saveProduct(@Body product: ProductModel) : Call<ProductModel>
     @PUT("products/{id}")

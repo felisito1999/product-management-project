@@ -64,7 +64,7 @@ class UpdateProductFragment : Fragment() {
         setListeners()
     }
 
-    fun setListeners() {
+    private fun setListeners() {
         buttonUpdate.setOnClickListener {
             product.sku = editTextUpdateSku.text.toString()
             product.name = editTextUpdateName.text.toString()

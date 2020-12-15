@@ -46,4 +46,6 @@
     <string name="product_update_button">Update</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="value_0">0</string>
+    <string name="welcome_sign">Welcome, consolestrapi</string>
 </resources>

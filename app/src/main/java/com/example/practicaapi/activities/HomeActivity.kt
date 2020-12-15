@@ -79,7 +79,7 @@ class HomeActivity : AppCompatActivity(){
 
     private fun changeNavigationHeaderInfo() {
         val headerView = navigationView.getHeaderView(0)
-        headerView.textEmail.text = "Hello ${loggedUser.username}"
+        headerView.textEmail.text = "Hello, ${loggedUser.username}"
     }
 
     private fun loadUserInformation() {

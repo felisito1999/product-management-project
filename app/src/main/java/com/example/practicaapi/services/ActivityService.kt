@@ -36,12 +36,14 @@ class ActivitiesManager(activity: Activity) {
     }
 
     fun checkIfLoggedIn() {
-        if (ServiceManager.getTokenManager(targetActivity).getAccessToken().isNullOrEmpty() && !targetActivity.javaClass.isInstance(
-                MainActivity()
+        val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()
+        if (token.isNullOrEmpty() && targetActivity.javaClass.isInstance(
+                HomeActivity()
             )) {
             goToLogin()
             finishActivity()
-        }else if(!targetActivity.javaClass.isInstance(MainActivity())){
+        }
+        else if(targetActivity.javaClass.isInstance(MainActivity()) && !token.isNullOrEmpty()){
             goToHomeActivity()
             finishActivity()
         }

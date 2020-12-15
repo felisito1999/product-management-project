@@ -35,22 +35,22 @@ class ProductService(activity : Activity) {
         })
     }
 
-    fun getProductsCount(onComplete: (ProductCountResponse) -> Unit){
+    fun getProductsCount(onComplete: (Int) -> Unit){
         val token = ServiceManager.getTokenManager(targetActivity).getAccessToken()!!
         val service = RetrofitBuilderService.getAuthenticatedProductInstance(targetActivity, token)
 
-        service.getProductsCount().enqueue(object : retrofit2.Callback<ProductCountResponse>{
+        service.getProductsCount().enqueue(object : retrofit2.Callback<Int>{
             override fun onResponse(
-                call: Call<ProductCountResponse>,
-                response: Response<ProductCountResponse>
+                call: Call<Int>,
+                response: Response<Int>
             ) {
                 var productCountResponse = response.body()
                 onComplete.invoke(productCountResponse!!)
 
-                Log.d("Product count", response.body()!!.count.toString())
+                Log.d("Product count", response.body()!!.toString())
             }
 
-            override fun onFailure(call: Call<ProductCountResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Int>, t: Throwable) {
                 Toast.makeText(
                     targetActivity,
                     "Could not get the quantity of products in the system",

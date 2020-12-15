@@ -25,6 +25,9 @@ class MainPageFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var productCount : Int = 0
+    private lateinit var username : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 /*        arguments?.let {
@@ -44,6 +47,8 @@ class MainPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getUserInformation()
+        loadCountProducts()
         setListeners()
     }
 
@@ -53,6 +58,31 @@ class MainPageFragment : Fragment() {
             ServiceManager.getTokenManager(requireActivity()).deleteToken()
             ServiceManager.getActivityManager(requireActivity()).goToLogin()
         }
+    }
+
+    private fun loadCountProducts() {
+        ServiceManager.getProductManager(requireActivity()).getProductsCount {productCountResponse ->
+            productCount = productCountResponse
+            changeProductCount(productCount)
+        }
+
+
+    }
+
+    private fun getUserInformation() {
+        ServiceManager.getUserInformationManager(requireActivity()).getUserInformation { userInfo ->
+            username = userInfo.username
+
+            changeWelcomeSign(username)
+        }
+    }
+
+    private fun changeProductCount(productCount : Int){
+        textViewProductsCount.text = productCount.toString()
+    }
+
+    private fun changeWelcomeSign(username : String) {
+        textViewWelcomeSign.text = "Welcome, ${username}"
     }
 
     companion object {
